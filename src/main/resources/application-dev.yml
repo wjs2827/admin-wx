@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: service-swagger
+  datasource:
+    url: jdbc:mysql://localhost:3306/restaurant?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&verifyServerCertificate=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: defaultDataSource
+  mybatis:
+    configuration:
+      map-underscore-to-camel-case: true
+      auto-mapping-behavior: partial
+    mapper-locations: classpath:mapper/*.xml
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtualHost: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    listener:
+      direct:
+        acknowledge-mode: manual
+        concurrency: 1
+        max-concurrency: 10
+        prefetch: 1
+        retry:
+          initial-interval: 3000
+          enabled: true
+          max-attempts: 10
+          max-interval: 10000
+          multiplier: 1.0
+      simple:
+        prefetch: 1
+        default-requeue-rejected: false
+        concurrency: 1
+        max-concurrency: 1
+        acknowledge-mode: manual
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+
+
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    max-http-header-size: 8096
+server:
+  port: 8088
+  host: 192.168.0.115
+strategy:
+  place-order: 1
+
+
+
+
+
+
