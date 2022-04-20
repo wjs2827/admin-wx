@@ -21,9 +21,9 @@ import java.util.concurrent.TimeUnit;
  * @date 2021/12/12
  * @email happysnaker@foxmail.com
  */
-@Component("firstChain")
+//@Component("firstChain")
 @Order(1)
-@WebFilter(filterName = "AbstractFilterChain",urlPatterns = {"/*"})
+//@WebFilter(filterName = "AbstractFilterChain",urlPatterns = {"/*"})
 @Slf4j
 public class SecurityFilter extends AbstractFilterChain {
     /** 10s 内最多允许 ip 访问次数 */

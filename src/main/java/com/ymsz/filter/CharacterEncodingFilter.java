@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
  * @date 2021/12/12
  * @email happysnaker@foxmail.com
  */
-@Component("fourthFilter")
+//@Component("fourthFilter")
 public class CharacterEncodingFilter extends AbstractFilterChain {
     @Override
     public boolean isRequired(HttpServletRequest request, HttpServletResponse response) {

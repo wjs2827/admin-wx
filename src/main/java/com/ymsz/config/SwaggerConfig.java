@@ -12,10 +12,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.ArrayList;
 
 /**
- * @author Happysnaker
+ * @author jinshan.wang
  * @description
- * @date 2021/11/10
- * @email happysnaker@foxmail.com
+ * @date 2022/04/20
+ * @email jinshan.wang.it@foxmail.com
  */
 @Configuration
 @EnableSwagger2
@@ -35,7 +35,7 @@ public class SwaggerConfig {
                         "10",
                         new ArrayList()))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.happysnaker.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.ymsz.controller"))
                 .build();
     }
 

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2021/12/12
  * @email happysnaker@foxmail.com
  */
-@Component("thirdFilter")
+//@Component("thirdFilter")
 public class UserIdAuthenticateFilter extends AbstractFilterChain {
     private String USER_ID = "userId";
     private String ORDER_ID = "orderId";

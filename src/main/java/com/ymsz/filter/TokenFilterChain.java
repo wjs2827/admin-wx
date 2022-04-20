@@ -23,7 +23,7 @@ import java.io.IOException;
  * @date 2021/12/12
  * @email happysnaker@foxmail.com
  */
-@Component("secondFilter")
+//@Component("secondFilter")
 public class TokenFilterChain extends AbstractFilterChain {
     private String header = "Authorization";
     private String loginUri = "/login";

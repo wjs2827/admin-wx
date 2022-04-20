@@ -7,6 +7,7 @@ import com.ymsz.pojo.Address;
 import com.ymsz.service.AddressService;
 import com.ymsz.utils.JsonUtils;
 import com.ymsz.utils.VerifyUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2021/11/30
  * @email happysnaker@foxmail.com
  */
+@Slf4j
 @RestController
 public class AddressController extends BaseController {
     private AddressService service;
@@ -32,6 +34,7 @@ public class AddressController extends BaseController {
 
     @GetMapping("/get_user_address")
     public String getUserAddress(HttpServletRequest request, HttpServletResponse response) {
+        log.warn("getUserAddress get_user_address");
         return JsonUtils.listAddToJsonObject(new JSONObject(), service.getUserAddress(request.getParameter(USER_ID_PARAM))).toJSONString();
     }
 
