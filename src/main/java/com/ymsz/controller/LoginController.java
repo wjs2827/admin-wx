@@ -5,6 +5,7 @@ import com.ymsz.config.RedisCacheManager;
 import com.ymsz.controller.base.BaseController;
 import com.ymsz.exception.SignException;
 import com.ymsz.service.LoginService;
+import com.ymsz.utils.Constants;
 import com.ymsz.utils.TokenBuilder;
 import com.ymsz.utils.TokenUtils;
 import com.ymsz.utils.VerifyUtils;
@@ -18,10 +19,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 /**
- * @author Happysnaker
+ * @author jinshan.wang
  * @description
- * @date 2021/10/22
- * @email happysnaker@foxmail.com
+ * @date 2022/04/23
+ * @email jinshan.wang.it@foxmail.com
  */
 @RestController
 public class LoginController extends BaseController {
@@ -36,11 +37,12 @@ public class LoginController extends BaseController {
 
     @PostMapping(value = "/login")
     public String login(HttpServletRequest request, HttpServletResponse response) throws NoSuchAlgorithmException, SignException {
-        if (VerifyUtils.isNullOrEmpty(request.getParameter(JS_CODE_PARAM))) {
+        String jsCode = request.getHeader(Constants.header);
+        if (VerifyUtils.isNullOrEmpty(jsCode)) {
             response.setStatus(PARAM_ERROR_STATUS);
             return null;
         }
-        Map<String, String> map = service.getOpenId(request.getParameter(JS_CODE_PARAM));
+        Map<String, String> map = service.getOpenId(jsCode);
         System.out.println(map);
         String openid = map.get("openid");
         String sessionKey = map.get("session_key");

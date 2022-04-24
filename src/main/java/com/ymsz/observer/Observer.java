@@ -1,10 +1,10 @@
 package com.ymsz.observer;
 
 /**
- * @author Happysnaker
+ * @author ymsz
  * @description
  * @date 2021/11/9
- * @email happysnaker@foxmail.com
+ * @email jinshan.wang.it@foxmail.com
  */
 public interface Observer {
     /**

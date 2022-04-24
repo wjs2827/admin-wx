@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ymsz.mapper.UserMapper;
 import com.ymsz.pojo.User;
 import com.ymsz.service.LoginService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -13,6 +14,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Map;
@@ -24,6 +26,7 @@ import java.util.Map;
  * @email happysnaker@foxmail.com
  */
 @Service
+@Slf4j
 public class LoginServiceImpl implements LoginService {
     /**
      * APPID 和 密匙 换成你自己的
@@ -58,14 +61,14 @@ public class LoginServiceImpl implements LoginService {
             Map obj = (Map) JSONObject.parse(EntityUtils.toString(entity));
             System.out.println(obj);
             String openId = (String) obj.get("openid");
-            if (!userMapper.hasUser(openId)) {
+            if (StringUtils.hasLength(openId) && !userMapper.hasUser(openId)) {
                 userMapper.addUser(new User(openId));
             }
             return obj;
         } catch (ClientProtocolException e) {
-            e.printStackTrace();
+            log.error("getOpenId is ClientProtocolException e:",e);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("getOpenId is IOException e:",e);
         }
         return null;
     }

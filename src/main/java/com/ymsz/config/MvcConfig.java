@@ -1,6 +1,7 @@
 package com.ymsz.config;
 
 import com.ymsz.interceptor.MyInterceptor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import java.util.Map;
  * @email ymsz@foxmail.com
  */
 @Configuration
+@Slf4j
 public class MvcConfig  implements WebMvcConfigurer {
 
     @Bean
@@ -26,31 +28,6 @@ public class MvcConfig  implements WebMvcConfigurer {
         return new MyInterceptor();
     }
 
-
-//    @Bean
-//    public HttpMessageConverter<String> responseBodyConverter() {
-//        return new StringHttpMessageConverter(
-//                StandardCharsets.UTF_8);
-//    }
-
-//    @Override
-//    public void configureMessageConverters(
-//            List<HttpMessageConverter<?>> converters) {
-//        super.configureMessageConverters(converters);
-//        converters.add(responseBodyConverter());
-//
-//        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-//        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-//        fastJsonConfig.setSerializerFeatures(
-//                SerializerFeature.PrettyFormat
-//        );
-//        List<MediaType> fastMediaTypes = new ArrayList<>();
-//        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
-//        fastConverter.setSupportedMediaTypes(fastMediaTypes);
-//        fastConverter.setFastJsonConfig(fastJsonConfig);
-//
-//        converters.add(fastConverter);
-//    }
 
     /**
      * 自定义策略
@@ -77,6 +54,7 @@ public class MvcConfig  implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        log.info("ResourceHandlerRegistry registry 静态文件拦截器注册加载");
         //注册静态文件
         registry.addResourceHandler("/statics/**").addResourceLocations("classpath:/statics/");
         // 解决 SWAGGER 404报错
@@ -90,6 +68,8 @@ public class MvcConfig  implements WebMvcConfigurer {
      */
     @Override
     public  void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(myInterceptor()).addPathPatterns("/get_user_orders");
+        log.info("InterceptorRegistry registry url拦截器注册加载");
+        //addPathPatterns 需要拦截的路径，excludePathPatterns 放行的路径
+        registry.addInterceptor(myInterceptor()).addPathPatterns("/**").excludePathPatterns("/login");
     }
 }
